@@ -98,7 +98,6 @@ void Game::render()
 
 void Game::update()
 {
-
 	mWorld->Step(1.0f / 60.0f, 10, 4);
 }
 
@@ -128,15 +127,15 @@ void Game::clean()
 
 void Game::createWorld()
 {
-	b2Vec2 gravity(0.0f, 17.81f);
+	b2Vec2 gravity(0.0f, 25.0f);
 	mWorld = std::make_unique<b2World>(gravity);
 
 	b2BodyDef groundBodyDef;
-	groundBodyDef.position.Set(-100.0f, 600.0f);
+	groundBodyDef.position.Set(980.0f, 1000.0f);
 	b2Body* groundBody = mWorld->CreateBody(&groundBodyDef);
 
 	b2PolygonShape groundBox;
-	groundBox.SetAsBox(5000.0f, 10.0f);
+	groundBox.SetAsBox(1000.0f, 10.0f);
 	//groundBody->CreateFixture(&groundBox, 0.0f);
 
 	b2FixtureDef fixtureDef;
@@ -151,17 +150,15 @@ void Game::createWorld()
 void Game::createSubstrate()
 {
 
-	for (int i = 1; i < 25; i++) {
-		for (int j = 1; j < 24; j++) {
+	for (int i = 1; i < 64; i++) {
+		for (int j = 1; j < 30; j++) {
 			float r = ((static_cast <float> (rand()) / 
-				      static_cast <float> (RAND_MAX)) - 0.5f) * 7;
+				      static_cast <float> (RAND_MAX)) - 0.5f) * 5;
 
-			Ball newBall;
-			float xPos = i * 25 + r;
-			float yPos = j * 25;
+			float xPos = i * 30 + r;
+			float yPos = j * 30;
 
-			newBall.init(mWorld.get(), glm::vec2(xPos, yPos), 12.0f);
-			balls.push_back(newBall);
+			balls.push_back(Ball(mWorld.get(), glm::vec2(xPos, yPos), 10.0f));
 		}
 	}
 

@@ -14,11 +14,9 @@ struct Circle
 class Ball
 {
 public:
-	Ball();
+	Ball(b2World* world, const glm::vec2& position, const float radius);
 	~Ball();
 
-	void init(b2World* world, const glm::vec2& position, const float radius);
-	
 	void render(SDL_Renderer* renderer);
 	void update();
 	

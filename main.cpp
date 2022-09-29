@@ -15,7 +15,7 @@ int main(int argc, char** args)
 	game = new Game();
 	
 	game->initSubsystems();
-	game->initWindow("Crawling", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 640, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
+	game->initWindow("Crawling", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1920, 1080, SDL_WINDOW_FULLSCREEN | SDL_WINDOW_OPENGL);
 	game->initRenderer();
 	game->checkInitStatus();
 
