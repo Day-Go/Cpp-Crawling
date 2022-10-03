@@ -20,7 +20,9 @@ int main(int argc, char** args)
 	game->checkInitStatus();
 
 	game->createWorld();
+	game->createFloor();
 	game->createSubstrate();
+	game->createOrganism();
 
 	while (game->isRunning())
 	{

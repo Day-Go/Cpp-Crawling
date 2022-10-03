@@ -84,12 +84,16 @@ void Game::render()
 
 	// clear the window to black
 	SDL_RenderClear(pRenderer);
-
 	SDL_SetRenderDrawColor(pRenderer, 0, 0, 0, 255);
 
-	for (auto ball : balls)
+	for (auto &ball : balls)
 	{
 		ball.render(pRenderer);
+	}
+
+	for (auto& organism : organisms)
+	{
+		organism.render(pRenderer);
 	}
 
 	// show the window
@@ -129,37 +133,66 @@ void Game::createWorld()
 {
 	b2Vec2 gravity(0.0f, 25.0f);
 	mWorld = std::make_unique<b2World>(gravity);
+}
 
+void Game::createFloor()
+{
 	b2BodyDef groundBodyDef;
+<<<<<<< Updated upstream
 	groundBodyDef.position.Set(980.0f, 1000.0f);
 	b2Body* groundBody = mWorld->CreateBody(&groundBodyDef);
 
 	b2PolygonShape groundBox;
 	groundBox.SetAsBox(1000.0f, 10.0f);
 	//groundBody->CreateFixture(&groundBox, 0.0f);
+=======
+	groundBodyDef.position.Set(100.0f, 600.0f);
+	groundBodyDef.type = b2_staticBody;
+
+	b2Body* groundBody = mWorld->CreateBody(&groundBodyDef);
+
+	b2PolygonShape groundBox;
+	groundBox.SetAsBox(5000.0f, 10.0f);
+>>>>>>> Stashed changes
 
 	b2FixtureDef fixtureDef;
 
 	fixtureDef.shape = &groundBox;
 	fixtureDef.density = 0.0f;
-	fixtureDef.friction = 1000.0f;
+	fixtureDef.friction = 1.0f;
 
 	groundBody->CreateFixture(&fixtureDef);
 }
 
 void Game::createSubstrate()
 {
+<<<<<<< Updated upstream
 
 	for (int i = 1; i < 64; i++) {
 		for (int j = 1; j < 30; j++) {
+=======
+	for (int i = 1; i < 25; i++) {
+		for (int j = 1; j < 24; j++) {
+>>>>>>> Stashed changes
 			float r = ((static_cast <float> (rand()) / 
 				      static_cast <float> (RAND_MAX)) - 0.5f) * 5;
 
+<<<<<<< Updated upstream
 			float xPos = i * 30 + r;
 			float yPos = j * 30;
 
 			balls.push_back(Ball(mWorld.get(), glm::vec2(xPos, yPos), 10.0f));
+=======
+			float xPos = i * 25 + r;
+			float yPos = j * 25;
+
+			balls.push_back(Ball(mWorld.get(), glm::vec2(xPos, yPos), 12.0f));
+>>>>>>> Stashed changes
 		}
 	}
+}
 
+void Game::createOrganism()
+{
+	organisms.push_back(Organism(mWorld.get()));
 }

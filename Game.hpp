@@ -6,8 +6,9 @@
 #include <vector>
 #include <string>
 #include <algorithm>
-#include "Ball.hpp"
 #include "Box2D.h"
+#include "Ball.hpp"
+#include "Organism.hpp"
 
 class Game 
 {
@@ -22,7 +23,9 @@ public:
 	void checkInitStatus();
 
 	void createWorld();
+	void createFloor();
 	void createSubstrate();
+	void createOrganism();
 
 	void render();
 	void update();
@@ -40,6 +43,7 @@ private:
 	SDL_Renderer* pRenderer = 0;
 
 	std::vector<Ball> balls;
+	std::vector<Organism> organisms;
 	std::unique_ptr<b2World> mWorld;
 };
 
